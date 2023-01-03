@@ -50,7 +50,7 @@ app.post('/signup',async (req,res)=>{
     })
 })
 
-app.put('/:id',upload.single('profil_picture'),checkIfUserExist,async (req,res)=>{
+app.post('/:id',upload.single('profil_picture'),checkIfUserExist,async (req,res)=>{
     const {_id} =req
     const user = await Users.updateOne(
         {_id},{profile_picture:`http://localhost:5000/${req.file.filename}`}
