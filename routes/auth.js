@@ -4,6 +4,7 @@ const bcrypt =require("bcrypt")
 const issueToken = require('../utils/jwt')
 const Users = require('../models/Users')
 const {upload} = require('../config/multer')
+const { checkIfUserExist } = require('../middleware/User')
 
 app.post('/login', async(req,res)=>{
 
@@ -47,6 +48,14 @@ app.post('/signup',async (req,res)=>{
     res.json({
         user
     })
+})
+
+app.put('/:id',upload.single('profil_picture'),checkIfUserExist,async (req,res)=>{
+    const {_id} =req
+    const user = await Users.updateOne(
+        {_id},{profile_picture:`http://localhost:5000/${req.file.filename}`}
+    )
+    res.status(200).json(user)
 })
 
 module.exports= app

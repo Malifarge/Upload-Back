@@ -7,7 +7,7 @@ require('./Users')
 
 const connectDb = () =>{
     
-    mongoose.connect(`mongodb://${process.env.URL}:${process.env.PORT}/Ballade_db`)
+    mongoose.connect(`mongodb://${process.env.URL}:${process.env.PORT}/Upload`)
 
     const db = mongoose.connection
 
